@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-class ExamplesTest {
+class AllTests {
 
     @Test
-    void testParallel() {
+    void all() {
         Results results = Runner.path("classpath:examples")
                 .outputCucumberJson(true)
                 .parallel(5);
@@ -29,7 +29,7 @@ class ExamplesTest {
         Collection<File> jsonFiles = FileUtils.listFiles(new File(karateOutputPath), new String[] { "json" }, true);
         List<String> jsonPaths = new ArrayList(jsonFiles.size());
         jsonFiles.forEach(file -> jsonPaths.add(file.getAbsolutePath()));
-        Configuration config = new Configuration(new File("target"), "demo");
+        Configuration config = new Configuration(new File("target"), "poc-karate");
         ReportBuilder reportBuilder = new ReportBuilder(jsonPaths, config);
         reportBuilder.generateReports();
     }

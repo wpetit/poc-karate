@@ -1,9 +1,11 @@
+@user-management
 Feature: User management testing
 
   Background:
     * url 'https://jsonplaceholder.typicode.com'
     * configure ssl = true
 
+  @admin-role
   Scenario: get all users and then get the first user by id
     Given path 'users'
     When method get
@@ -15,7 +17,8 @@ Feature: User management testing
     When method get
     Then status 200
 
-  Scenario: create a user and then get it by id
+  @admin-role
+  Scenario: create a user
     * def user =
       """
       {
@@ -31,7 +34,8 @@ Feature: User management testing
       }
       """
 
-    Given url 'https://jsonplaceholder.typicode.com/users'
+    Given url 'https://jsonplaceholder.typicode.com'
+    And path 'users'
     And request user
     When method post
     Then status 201
@@ -39,8 +43,9 @@ Feature: User management testing
     * def id = response.id
     * print 'created id is: ', id
 
-    Given path id
-    # When method get
-    # Then status 200
-    # And match response contains user
-  
+  @admin-role
+  Scenario: get a unknown user
+    Given path 'users', '13'
+    When method get
+    Then status 200
+
