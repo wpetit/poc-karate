@@ -42,10 +42,10 @@ Feature: User management testing
 
     * def id = response.id
     * print 'created id is: ', id
-
-  @admin-role
-  Scenario: get a unknown user
-    Given path 'users', '13'
-    When method get
-    Then status 200
+#
+#  @admin-role
+#  Scenario: get a unknown user
+#    Given path 'users', '13'
+#    When method get
+#    Then status 200
 
